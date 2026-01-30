@@ -4,6 +4,15 @@ const User = require('../models/User');
 const Todo = require('../models/Todo');
 const { generateToken } = require('../utils/jwt');
 
+/**
+ * Login Controller - Authenticates user with email and password
+ * - Validates email and password are provided
+ * - Finds user in database
+ * - Compares provided password with stored hash
+ * - Returns JWT token and user info on success
+ * @param {Object} req - Express request object with email and password in body
+ * @param {Object} res - Express response object
+ */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -39,6 +48,16 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * Register Controller - Creates a new user account
+ * - Validates email and password are provided
+ * - Checks if email is already registered
+ * - Hashes password using bcrypt
+ * - Creates new user in database
+ * - Returns JWT token and user info on success
+ * @param {Object} req - Express request object with email and password in body
+ * @param {Object} res - Express response object
+ */
 const register = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -70,6 +89,15 @@ const register = async (req, res) => {
   }
 };
 
+/**
+ * Demo Login Controller - Creates and authenticates a demo user
+ * - Generates unique demo user with UUID-based email
+ * - Creates demo user account in database
+ * - Populates with sample todos to help user explore the app
+ * - Returns JWT token for immediate use
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const demoLogin = async (req, res) => {
   try {
     // Generate unique demo user
@@ -84,7 +112,7 @@ const demoLogin = async (req, res) => {
       isDemo: true
     });
 
-    // Create sample todos for this demo user
+    // Create sample todos for this demo user to get them started
     const sampleTodos = [
       { todoItem: 'Welcome to my Todo App! 👋', priority: 2, status: 1, user: user._id },
       { todoItem: 'Try adding a new todo using the input above', priority: 1, status: 1, user: user._id },

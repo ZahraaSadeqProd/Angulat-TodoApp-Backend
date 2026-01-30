@@ -1,3 +1,8 @@
+/**
+ * Server Entry Point
+ * Initializes and starts the Express server with database connection
+ * Handles environment configuration and demo data setup
+ */
 require('dotenv').config();
 
 const app = require('./app');
@@ -7,6 +12,12 @@ const resetDemoTodos = require('./seed/resetDemoTodos');
 
 const PORT = process.env.PORT || 5000;
 
+/**
+ * Starts the server
+ * - Connects to MongoDB
+ * - Resets demo todos in development environment (for testing)
+ * - Listens on specified port
+ */
 const startServer = async () => {
   await connectDB();
 

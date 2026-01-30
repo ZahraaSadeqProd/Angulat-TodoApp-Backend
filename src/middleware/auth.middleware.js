@@ -1,5 +1,16 @@
 const jwt = require('jsonwebtoken');
 
+/**
+ * Authentication Middleware
+ * Verifies JWT token from Authorization header
+ * - Extracts token from "Bearer <token>" format
+ * - Validates token signature using JWT_SECRET
+ * - Attaches decoded user data to request object
+ * - Rejects requests without valid token
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
